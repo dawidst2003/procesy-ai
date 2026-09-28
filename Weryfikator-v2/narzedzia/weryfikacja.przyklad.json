@@ -1,0 +1,22 @@
+{
+  "klient": "Nazwa klienta",
+  "tokeny_wlasne": [
+    "nazwaklienta",
+    "sklep klienta"
+  ],
+  "jezyk_rynku": "pl",
+  "sciezki": {
+    "zrodla": "04-opisy-produktow/zrodla",
+    "produkty": "produkty",
+    "dokumenty": "dokumenty",
+    "kontrola": "04-opisy-produktow/kontrola"
+  },
+  "env": "",
+  "profil_tekstu": "produkty",
+  "tekst": {
+    "_opis": "Wyjątki projektu (dopisywane do profilu). Każdy wyjątek zapisz w rejestrze rozstrzygnięć projektu.",
+    "niepotwierdzone": {
+      "pomijaj_atrybuty": ""
+    }
+  }
+}

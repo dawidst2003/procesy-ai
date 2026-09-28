@@ -1,0 +1,109 @@
+{
+  "_opis": "Profil bramek TREŚĆ ⇄ KARTA dla opisów produktów (tekst_*.py). Wybór w weryfikacja.json: \"profil_tekstu\": \"produkty\". Projekt dopisuje własne pozycje w sekcji \"tekst\" (listy są doklejane).",
+  "pozycje_krytyczne": [
+    {
+      "nazwa": "pierwsza pomoc",
+      "_opis": "Wiersz karty [POTWIERDZONE] o pierwszej pomocy → każda droga narażenia obecna w karcie musi być w treści, w strefie pierwszej pomocy.",
+      "atrybut": "pierwsz\\w* pomoc",
+      "strefa_opisu": "pierwsz\\w* pomoc|w przypadku|w razie|po (połknięciu|wdychaniu|kontakcie|dostaniu)|przy (połknięciu|wdychaniu|kontakcie)",
+      "elementy": [
+        {
+          "etykieta": "skóra",
+          "w_karcie": "skór",
+          "w_opisie": "skór"
+        },
+        {
+          "etykieta": "oczy",
+          "w_karcie": "\\boczy\\b|\\boczu\\b|\\boka\\b|okulist",
+          "w_opisie": "\\boczy\\b|\\boczu\\b|\\boka\\b|okulist"
+        },
+        {
+          "etykieta": "połknięcie",
+          "w_karcie": "połknię|połknąć|spożyci",
+          "w_opisie": "połknię|połknąć|spożyci"
+        },
+        {
+          "etykieta": "wdychanie",
+          "w_karcie": "wdycha|inhalac|świeże powietrze",
+          "w_opisie": "wdycha|inhalac|świeże powietrze|drog\\w* oddechow"
+        }
+      ],
+      "blokujaca": true
+    },
+    {
+      "nazwa": "kody H",
+      "_opis": "Każdy kod H/EUH z wiersza klasyfikacji [POTWIERDZONE] musi stać w treści.",
+      "atrybut": "klasyfikacj|CLP|zwrot\\w* (wskazując|H)|hasło|zagrożen|oznakowanie etykiet",
+      "wzorzec_kodu": "\\bEUH ?\\d{3}\\b|\\bH\\d{3}[a-z]?\\b",
+      "blokujaca": true
+    },
+    {
+      "nazwa": "kody P",
+      "_opis": "Kody P z wiersza klasyfikacji — informacyjnie: opis zwykle podaje wybór, nie komplet.",
+      "atrybut": "klasyfikacj|CLP|zwrot\\w* (ostrożności|P)",
+      "wzorzec_kodu": "\\bP\\d{3}(?:\\+P\\d{3})*\\b",
+      "blokujaca": false
+    },
+    {
+      "nazwa": "zdania ostrzegawcze",
+      "_opis": "Ostrzeżenia, przeciwwskazania, warunki użycia [POTWIERDZONE]: każde zdanie źródła sprawdzane po słowach treściowych. Informacyjnie — lista do przejrzenia, nie werdykt.",
+      "atrybut": "ostrzeż|przeciwwskaz|środki ostrożności|warunki użycia|nie stosować|ograniczen",
+      "tryb": "zdania",
+      "prog_pokrycia": 0.5,
+      "blokujaca": false
+    }
+  ],
+  "zawezenia": [
+    {
+      "szeroki": "wirusobójcz",
+      "zawezenie": "otoczk|osłonk|ograniczon|lipofil",
+      "_opis": "Źródło mówi o działaniu wobec wirusów otoczkowych (ograniczone), treść pisze samo „wirusobójczy” — obietnica szersza niż źródło."
+    },
+    {
+      "szeroki": "sporobójcz",
+      "zawezenie": "\\bC\\. ?difficile|przetrwalnik\\w* bakterii|spor\\w* \\(",
+      "_opis": "Działanie sporobójcze bywa deklarowane tylko wobec wybranych przetrwalników."
+    }
+  ],
+  "niepotwierdzone": {
+    "_opis": "Fragmenty charakterystyczne wyciągane z wartości wierszy bez [POTWIERDZONE]; ich obecność w treści = flaga (chyba że ten sam fragment stoi też w wierszu [POTWIERDZONE]).",
+    "wzorce": [
+      "ul\\. [A-ZŁŚŻŹĆ][\\wąćęłńóśźż]+(?: [\\wąćęłńóśźż]+){0,3} \\d+[a-z]?",
+      "\\b\\d{2}-\\d{3}\\b",
+      "\\d+(?:[.,]\\d+)? ?(?:%|mm|cm|ml|µl|l|g|kg|mg|°c|min|h|godz\\w*|mies\\w*|lat[a]?|dni|szt\\w*|µm|g/m²)(?![\\wąćęłńóśźż])",
+      "„([^”\" ]{3,30} [^”\"]{3,40})[”\"]"
+    ],
+    "pomijaj_fragmenty": ""
+  },
+  "zamek": {
+    "_opis": "P4 „zero śladów kuchni” — nazwy dokumentów źródłowych i zdania o stanie dokumentacji nie wychodzą do klienta. `zakazane` blokują (jednoznaczne); `ostrzegawcze` tylko do spojrzenia (bywają poprawne: „przeczytać etykietę i ulotkę”, „dostępnych w sklepie”). Sprawdzone na paczce 201 opisów projektu odniesienia (2026-09): 0 fałszywych blokad.",
+    "zakazane": [
+      "kart[ayę] (charakterystyki|technicznej)",
+      "\\bSDS\\b",
+      "\\bIFU\\b",
+      "\\bkatalog(?!ow)",
+      "deklaracj[ai] zgodności",
+      "opakowani[au] producenta",
+      "\\bTD-[0-9]",
+      "z zastrzeżeniem"
+    ],
+    "ostrzegawcze": [
+      "ulotk",
+      "dokumentacj",
+      "w dostępnych",
+      "nie podaje",
+      "nie deklaruj",
+      "nie precyzuj",
+      "prawdopodobnie"
+    ]
+  },
+  "kanarek": {
+    "sekcje_usuniecia": "ostrzeż|przeciwwskaz|pierwsz\\w* pomoc|bezpiecze|środki ostrożności",
+    "sekcje_dopisania": "zalet|zastosowan|cechy"
+  },
+  "sklad": {
+    "_opis": "Tabela składu w treści: suma dokładnych wartości % nie może przekroczyć 100 (+ tolerancja).",
+    "naglowek": "skład|składnik|substancj\\w* czynn|materiał",
+    "tolerancja": 0.5
+  }
+}
